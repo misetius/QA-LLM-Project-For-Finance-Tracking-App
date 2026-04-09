@@ -4,7 +4,7 @@ It focuses on testing **accuracy, hallucinations, latency, and edge-case handlin
 
 ## Models tested in this project
 
-LLM models tested in this project were Qwen 2.5 VL, Pixtral and Gemma 3. 
+LLM models tested in this project were Qwen 2.5 VL, Pixtral and Gemma 3. Models were run with Ollama.
 
 ## How to run tests
 

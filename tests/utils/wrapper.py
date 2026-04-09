@@ -1,4 +1,5 @@
 import requests
+import json
 
 class ModelClient:
     def __init__(self, model_name):
@@ -12,6 +13,10 @@ class ModelClient:
             "model": self.model_name,
             "stream": False
         })   
-        response = response.json()['response']
-        
+        try:
+            response = response.json()['response']
+
+        except (KeyError, json.JSONDecodeError):
+            response = response.text
+
         return response
