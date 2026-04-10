@@ -1,5 +1,5 @@
 Report for qwen2.5vl
-True Positives: 6
+True Positives: 3
 False Positives: 0
-False Negatives: 0
+False Negatives: 3
 True Negatives: 2
