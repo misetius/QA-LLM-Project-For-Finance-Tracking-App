@@ -23,6 +23,22 @@ def random_image_in_b64():
     return image_b64
 
 @pytest.fixture
+def random_b64_string():
+    return "VGhpcyBpcyBhIHJhbmRvbSBiNjQgc3RyaW5nIHRoYXQgZG9lc24ndCBjb250YWluIGFueSBpbWFnZSBkYXRhLg=="
+
+@pytest.fixture
+def edge_case_image_in_b64_ripped_receipt():
+    with open('images/edge_case_image_receipt_ripped.jpeg', 'rb') as f:
+        image_b64 = base64.b64encode(f.read()).decode('utf-8')
+    return image_b64
+
+@pytest.fixture
+def edge_case_image_in_b64_image_from_side():
+    with open('images/edge_case_image_from_side.jpeg', 'rb') as f:
+        image_b64 = base64.b64encode(f.read()).decode('utf-8')
+    return image_b64
+
+@pytest.fixture
 def model_client(model):
     return ModelClient(model)
 

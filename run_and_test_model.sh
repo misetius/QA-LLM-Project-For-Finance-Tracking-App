@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# Argumentin tarkistus heti alussa
+
 if [ -z "$1" ]; then
   echo "Usage: $0 <model_name>"
   exit 1
@@ -26,4 +26,4 @@ echo "Pulling model: $MODEL..."
 docker exec ollama ollama pull "$MODEL"
 
 
-python -m pytest tests/accurary-tests/test_llm_model.py --model "$MODEL"
+python -m pytest tests/accurary-tests/test_llm_model.py --model "$MODEL" 
