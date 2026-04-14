@@ -1,6 +1,7 @@
 import pytest
-from utils.wrapper import ModelClient
+from utils.model_client import ModelClient
 from utils.generate_metrics_report import Report
+from utils.generate_performance_report import PerformanceTestReport
 import base64
 
 def pytest_addoption(parser):
@@ -39,6 +40,18 @@ def edge_case_image_in_b64_image_from_side():
     return image_b64
 
 @pytest.fixture
+def edge_case_image_in_b64_blurry_receipt():
+    with open('images/edge_case_image_blurry.jpeg', 'rb') as f:
+        image_b64 = base64.b64encode(f.read()).decode('utf-8')
+    return image_b64
+
+@pytest.fixture
+def edge_case_image_in_b64_minus():
+    with open('images/edge_case_image_minus.jpeg', 'rb') as f:
+        image_b64 = base64.b64encode(f.read()).decode('utf-8')
+    return image_b64
+
+@pytest.fixture
 def model_client(model):
     return ModelClient(model)
 
@@ -47,4 +60,11 @@ def report(model):
     metrics_report = Report(model)
     yield metrics_report
     metrics_report.save_report()    
+
+@pytest.fixture(scope="session", autouse=True)
+def performance_report(model):
+    performance_report = PerformanceTestReport(model)
+    yield performance_report
+    performance_report.save_report()
+
 

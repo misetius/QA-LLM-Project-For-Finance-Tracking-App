@@ -4,9 +4,11 @@ It focuses on testing **accuracy, hallucinations, latency, and edge-case handlin
 
 ## Models tested in this project
 
-LLM models tested in this project were Qwen 2.5 VL, Pixtral and Gemma 3. Models were run with Ollama.
+LLM models tested in this project were Qwen 2.5 VL, Ministral 3 and Gemma 4. Models were run with Ollama.
 
 ## How to run tests
+
+Tests will take quite long to run. Atleast on my computer running the full test suite for one model took half an hour.
 
 After copying the project tests can be run with the help of the script provided in this way:
 
@@ -14,8 +16,14 @@ After copying the project tests can be run with the help of the script provided 
 ./run_and_test_model.sh <model_you_want_to_test>
 ```
 
-The setup for llm takes quite long so if already have model running you can also just use pytest like this while in root of the project:
+The setup for llm takes quite long so if model is already running you can also just use pytest like this while in root of the project:
 
 ```
-pytest tests/
+pytest tests/ --model <MODEL> 
 ```
+
+
+
+## Results from current tests
+
+Still in development

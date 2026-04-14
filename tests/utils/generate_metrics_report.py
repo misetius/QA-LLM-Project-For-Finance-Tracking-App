@@ -7,15 +7,19 @@ class Report:
         self.fp = 0
         self.fn = 0
         self.tn = 0
+        self.false_negatives = []
+        self.false_positives = []
 
     def true_positive(self):
         self.tp += 1
 
-    def false_positive(self):
+    def false_positive(self, test_that_failed, answer):
         self.fp += 1
+        self.false_positives.append((test_that_failed, answer))
 
-    def false_negative(self):
+    def false_negative(self, test_that_failed, answer):
         self.fn += 1
+        self.false_negatives.append((test_that_failed, answer))
 
     def true_negative(self):
         self.tn += 1
@@ -37,3 +41,9 @@ class Report:
             f.write(f"Precision: {precision:.2f}\n")    
             f.write(f"Accuracy: {accuracy:.2f}\n")
             f.write(f"F1 Score: {f1_score:.2f}\n")
+            f.write("\nFalse Negatives:\n")
+            for fn in self.false_negatives:
+                f.write(f"- {fn}\n")    
+            f.write("\nFalse Positives:\n")
+            for fp in self.false_positives:
+                f.write(f"- {fp}\n")

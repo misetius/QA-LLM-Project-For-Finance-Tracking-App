@@ -1,5 +1,17 @@
 Report for qwen2.5vl
-True Positives: 3
-False Positives: 0
+True Positives: 4
+False Positives: 1
 False Negatives: 3
 True Negatives: 2
+Recall: 0.57
+Precision: 0.80
+Accuracy: 0.60
+F1 Score: 0.67
+
+False Negatives:
+- ('test_categorize_products_in_the_receipt failed', [{'product': 'NATURAL ED RASPBERRY 0,33L TLK', 'category': 'Food', 'price': '2.32'}, {'product': 'PANTTI 0,15 EUR TÖLKKI', 'category': 'Food', 'price': '0.15'}, {'product': 'NO SUGAR RASPBERRY 0,5L', 'category': 'Food', 'price': '1.37'}, {'product': 'PANTTI 0,15 EUR TÖLKKI', 'category': 'Food', 'price': '0.15'}, {'product': 'HEDELMÄMIX PURUKUMI', 'category': 'Food', 'price': '2.48'}, {'product': 'SAKSANPÄHKINÄ', 'category': 'Food', 'price': '3.95'}, {'product': '100 % KAURA 6KPL', 'category': 'Food', 'price': '3.68'}, {'product': 'VANILJAMAITOVALM. 125G SKYR AIR', 'category': 'Food', 'price': '2.70'}, {'product': 'SKYR AIR MANDRN-JUUSTOKAKKU 125G', 'category': 'Food', 'price': '4.05'}, {'product': 'ENJOY PEAR ICE CREAM PURUKUMI', 'category': 'Food', 'price': '5.82'}, {'product': 'MUOVIKASSI SM HARMAA', 'category': 'Other', 'price': '0.50'}, {'product': 'PANTTI 0,15 EUR TÖLKKI', 'category': 'Drinks', 'price': '0.15'}, {'product': 'PANTTI 0,15 EUR TÖLKKI', 'category': 'Drinks', 'price': '0.15'}])
+- ('test_categorize_products_in_the_ripped_receipt failed', [{'product': 'Jenkki Fresh Apple Crush 35g', 'category': 'Food', 'price': '1.69'}, {'product': 'Monster Ultra Gold Long 0.5l', 'category': 'Drinks', 'price': '2.35'}, {'product': 'Tölkkipantti 0.15', 'category': 'Drinks', 'price': '0.15'}])
+- ('test_minus_sign_in_receipt_categorization failed', [{'product': 'Valio Arki kevytmaitojuoma 1l', 'category': 'drinks', 'price': '1.24'}, {'product': 'Monster Ultra Gold Long 0.5l', 'category': 'drinks', 'price': '2.20'}, {'product': 'Töikkipanti 0.15', 'category': 'drinks', 'price': '0.15'}, {'product': 'Pirkka purukumi 130g hedelmä', 'category': 'food', 'price': '2.34'}, {'product': 'ED Sour Apple No Sugar 0.5l', 'category': 'drinks', 'price': '2.34'}, {'product': 'Pullopannti KMP 0.20 0.35L-1L', 'category': 'drinks', 'price': '1.95'}])
+
+False Positives:
+- ('test_very_blurry_receipt failed', 'The image of the receipt shows the following products and their prices:\n\n1. **Mister JAE RISO** - 3x0.5€\n2. **Tikkuraitti** - 0.15€\n3. **1 APL** - 0.15€\n4. **D-TAK KOSTA** - 101.30€\n5. **Lavelli Puslinolea** - 2.85€\n\nThe total amount on the receipt is 12.45€.')

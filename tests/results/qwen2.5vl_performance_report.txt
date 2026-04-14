@@ -1,0 +1,5 @@
+Performance Report for qwen2.5vl
+Total Cold Latency Tests: 1
+Total Warm Latency Tests: 5
+Average Cold Latency: 139.02 seconds
+Average Warm Latency: 37.84 seconds

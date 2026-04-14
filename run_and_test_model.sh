@@ -27,3 +27,6 @@ docker exec ollama ollama pull "$MODEL"
 
 
 python -m pytest tests/accurary-tests/test_llm_model.py --model "$MODEL" 
+
+docker stop ollama
+docker rm ollama
