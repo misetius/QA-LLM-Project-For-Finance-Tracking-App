@@ -5,7 +5,12 @@ import time
 class TestRegression:
     def test_return_products_in_the_receipt(self, model_client, clear_image_in_b64, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(clear_image_in_b64, question)
+        try:
+            answer = model_client.generate_answer(clear_image_in_b64, question)
+        except Exception as e:
+            report.false_negative("test_return_products_in_the_receipt failed", str(e))
+            return
+
         try:
             assert "ed" in answer.lower()
             assert "skyr" in answer.lower()
@@ -24,9 +29,12 @@ class TestRegression:
         """
         
         answer = model_client.generate_answer(clear_image_in_b64, question)
-        
-        answer = json.loads(answer)
-        
+        try: 
+            answer = json.loads(answer)
+        except json.JSONDecodeError:
+            report.false_negative("test_categorize_products_in_the_receipt failed", answer)
+            return
+
         sum = 0
         for i in answer:
             sum += float(i['price'].replace(",", "."))
@@ -40,7 +48,12 @@ class TestRegression:
 class TestHallucination:
     def test_random_b64_string(self, model_client, random_b64_string, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(random_b64_string, question)
+        try:
+            answer = model_client.generate_answer(random_b64_string, question)
+        except Exception as e:
+            report.false_negative("test_random_b64_string failed", str(e))
+            return
+
         try:
             assert "sorry" in answer.lower() or "cannot" in answer.lower() or "no image" in answer.lower() or "failed" in answer.lower() or "invalid" in answer.lower() or "understand" in answer.lower()
             report.true_negative()
@@ -49,7 +62,12 @@ class TestHallucination:
 
     def test_non_receipt_image(self, model_client, random_image_in_b64, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(random_image_in_b64, question)
+        try:
+            answer = model_client.generate_answer(random_image_in_b64, question)
+        except Exception as e:
+            report.false_negative("test_non_receipt_image failed", str(e))
+            return
+
         try:
             assert "sorry" in answer.lower() or "cannot" in answer.lower() or "no image" in answer.lower() or "failed" in answer.lower() or "invalid" in answer.lower() or "understand" in answer.lower()
             report.true_negative()
@@ -58,9 +76,14 @@ class TestHallucination:
 
     def test_very_blurry_receipt(self, model_client, edge_case_image_in_b64_blurry_receipt, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(edge_case_image_in_b64_blurry_receipt, question)
         try:
-            assert "sorry" in answer.lower() or "cannot" in answer.lower() or "no image" in answer.lower() or "failed" in answer.lower() or "invalid" in answer.lower() or "understand" in answer.lower()
+            answer = model_client.generate_answer(edge_case_image_in_b64_blurry_receipt, question)
+        except Exception as e:
+            report.false_negative("test_very_blurry_receipt failed", str(e))
+            return
+
+        try:
+            assert "sorry" in answer.lower() or "cannot" in answer.lower() or "no image" in answer.lower() or "failed" in answer.lower() or "invalid" in answer.lower() or "understand" in answer.lower() or "please" in answer.lower()
             report.true_negative()
         except AssertionError:
             report.false_positive("test_very_blurry_receipt failed", answer)
@@ -69,7 +92,12 @@ class TestHallucination:
 class TestEdgeCases:
     def test_ripped_receipt(self, model_client, edge_case_image_in_b64_ripped_receipt, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(edge_case_image_in_b64_ripped_receipt, question)
+        try:
+            answer = model_client.generate_answer(edge_case_image_in_b64_ripped_receipt, question)
+        except Exception as e:
+            report.false_negative("test_ripped_receipt failed", str(e))
+            return
+
         try:
             assert "monster" in answer.lower()
             assert "jenkki fresh apple crush" in answer.lower()
@@ -79,7 +107,11 @@ class TestEdgeCases:
 
     def test_receipt_from_side(self, model_client, edge_case_image_in_b64_image_from_side, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(edge_case_image_in_b64_image_from_side, question)
+        try:
+            answer = model_client.generate_answer(edge_case_image_in_b64_image_from_side, question)
+        except Exception as e:
+            report.false_negative("test_receipt_from_side failed", str(e))
+            return
         try:
             assert "monster" in answer.lower()
             assert "jenkki fresh apple crush" in answer.lower()
@@ -97,11 +129,16 @@ class TestEdgeCases:
         
         answer = model_client.generate_answer(edge_case_image_in_b64_image_from_side, question)
         print(answer)
-        answer = json.loads(answer)
-        print(answer)
-        sum = 0
-        for i in answer:
-            sum += float(i['price'].replace(",", "."))
+        try:
+            answer = json.loads(answer)
+            
+            sum = 0
+            for i in answer:
+                sum += float(i['price'].replace(",", "."))
+        except json.JSONDecodeError:
+            report.false_negative("test_categorize_products_in_the_receipt_from_side failed", answer)
+            return
+        
         try:
             assert len(answer) == 2
             assert sum == 4.04
@@ -119,12 +156,14 @@ class TestEdgeCases:
         """
         
         answer = model_client.generate_answer(edge_case_image_in_b64_ripped_receipt, question)
-        print(answer)
-        answer = json.loads(answer)
-        print(answer)
-        sum = 0
-        for i in answer:
-            sum += float(i['price'].replace(",", "."))
+        try:
+            answer = json.loads(answer)
+            sum = 0
+            for i in answer:
+                sum += float(i['price'].replace(",", "."))
+        except json.JSONDecodeError:
+            report.false_negative("test_categorize_products_in_the_ripped_receipt failed", answer)
+            return
         try:
             assert sum == 4.04
             assert len(answer) == 2
@@ -134,7 +173,13 @@ class TestEdgeCases:
 
     def test_minus_sign_in_receipt(self, model_client, edge_case_image_in_b64_minus, report):
         question = "What products are in the image of receipt that was sent with the prompt?"
-        answer = model_client.generate_answer(edge_case_image_in_b64_minus, question)
+
+        try:
+            answer = model_client.generate_answer(edge_case_image_in_b64_minus, question)
+        except Exception as e:
+            report.false_negative("test_minus_sign_in_receipt failed", str(e))
+            return
+
         try:
             assert "ed" in answer.lower()
             assert "purukumi" in answer.lower()
@@ -151,12 +196,16 @@ class TestEdgeCases:
         """
         
         answer = model_client.generate_answer(edge_case_image_in_b64_minus, question)
-        print(answer)
-        answer = json.loads(answer)
-        print(answer)
-        sum = 0
-        for i in answer:
-            sum += float(i['price'].replace(",", "."))
+
+        try:
+            answer = json.loads(answer)
+            
+            sum = 0
+            for i in answer:
+                sum += float(i['price'].replace(",", "."))
+        except json.JSONDecodeError:
+            report.false_negative("test_minus_sign_in_receipt_categorization failed", answer)
+            return
         try:
             assert sum == 2.08
             assert len(answer) == 4

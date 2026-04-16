@@ -1,0 +1,5 @@
+Performance Report for gemma4
+Total Cold Latency Tests: 1
+Total Warm Latency Tests: 5
+Average Cold Latency: 82.10 seconds
+Average Warm Latency: 73.22 seconds

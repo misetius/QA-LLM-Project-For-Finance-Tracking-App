@@ -5,7 +5,7 @@ from utils.generate_performance_report import PerformanceTestReport
 import base64
 
 def pytest_addoption(parser):
-    parser.addoption("--model", default="qwen2.5vl")
+    parser.addoption("--model", default="qwen2.5-vl")
 
 @pytest.fixture(scope="session", autouse=True)
 def model(request):

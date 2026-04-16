@@ -1,0 +1,11 @@
+Report for qwen3-vl
+True Positives: 3
+False Positives: 2
+False Negatives: 5
+True Negatives: 1
+Recall: 0.38
+Precision: 0.60
+Accuracy: 0.36
+F1 Score: 0.46
+
+False Negatives:

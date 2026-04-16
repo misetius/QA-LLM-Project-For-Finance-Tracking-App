@@ -1,6 +1,9 @@
 import requests
 import json
 
+
+
+
 class ModelClient:
     def __init__(self, model_name):
         self.base_url = "http://localhost:11434/"
@@ -20,3 +23,4 @@ class ModelClient:
             response = response.text
 
         return response
+

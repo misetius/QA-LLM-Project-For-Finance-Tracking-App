@@ -1,0 +1,19 @@
+Report for gemma4
+True Positives: 3
+False Positives: 1
+False Negatives: 5
+True Negatives: 2
+Recall: 0.38
+Precision: 0.75
+Accuracy: 0.45
+F1 Score: 0.50
+
+False Negatives:
+- ('test_categorize_products_in_the_receipt failed', [{'product': 'NUTRAL ED RASPBERRY 0,33L TLK', 'category': 'drinks', 'price': '2.47'}, {'product': 'NO SUGAR RASPBERRY 0,5L', 'category': 'drinks', 'price': '1.52'}, {'product': 'HEDELMÄIX PURUKUMI', 'category': 'Food', 'price': '0.15'}, {'product': 'SAKSANPÄHKINÄ', 'category': 'Food', 'price': '3.95'}, {'product': '100 % KAURA 6KPL', 'category': 'Food', 'price': '3.68'}, {'product': 'VANILJAMAITOVALM. 125G SKYR AIR', 'category': 'Food', 'price': '2.70'}, {'product': 'SKYR AIR MANDRN-JUUSTOKAKKU 125G', 'category': 'Food', 'price': '4.05'}, {'product': 'ENJOY PEAR ICE CREAM PURUKUMI', 'category': 'Food', 'price': '5.82'}, {'product': 'MUOVIKASSI SM HARMAA', 'category': 'Other', 'price': '0.50'}])
+- ('test_ripped_receipt failed', 'Based on the receipt image, there are three distinct products listed:\n\n1.  **Jenkkki Fresh Apple Crush 35g**\n    *   Price: 1,69\n\n2.  **Monster Ultra Gold Long 0,51**\n    *   Price: 2,20\n\n3.  **Tölkkipannti 0,15** (This appears to be a container or type of bottle/product, priced at 0,15)\n    *   Price: 0,15\n\nThe total cost shown on the receipt is **4,04**.')
+- ('test_categorize_products_in_the_receipt_from_side failed', [{'product': 'Jenkki Fresh Apple Crush 35g', 'category': 'drinks', 'price': '1.84'}, {'product': 'Monster Ultra Gold Long 0.5L', 'category': 'drinks', 'price': '2.35'}])
+- ('test_categorize_products_in_the_ripped_receipt failed', [{'product': 'Jenkki Fresh Apple Crush', 'category': 'drinks', 'price': '1.84'}, {'product': 'Monster U Ultra Gold', 'category': 'drinks', 'price': '2.35'}])
+- ('test_minus_sign_in_receipt_categorization failed', [{'product': 'Valio Arki kevytmaltojuoma 1', 'category': 'drinks', 'price': '1.75'}, {'product': 'Monster Ultra Gold Long 0,5l', 'category': 'drinks', 'price': '2.35'}, {'product': 'Pirkka purukumi 130g hedelmä', 'category': 'food', 'price': '2.34'}, {'product': 'ED Sour Apple No Sugar 0,5l', 'category': 'drinks', 'price': '2.15'}])
+
+False Positives:
+- ('test_very_blurry_receipt failed', 'Based on the image of the receipt (which is in Finnish), the following products are listed:\n\n1.  **Monster 1946 Rossi Zero**\n2.  **Toikkipantti** (This likely translates to some form of antiseptic or similar care product.)\n3.  **Erisan kosteuttava voide 250ml** (Erisan moisturizing cream 250ml)\n4.  **Labeello haulivoide** (Labeello hand cream)')

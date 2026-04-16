@@ -1,0 +1,19 @@
+Report for ministral-3
+True Positives: 4
+False Positives: 2
+False Negatives: 4
+True Negatives: 1
+Recall: 0.50
+Precision: 0.67
+Accuracy: 0.45
+F1 Score: 0.57
+
+False Negatives:
+- ('test_categorize_products_in_the_receipt failed', '```json\n[\n    {"product": "NATURAL ED RASPBERRY 0,33L", "category": "Drinks", "price": "2.42"},\n    {"product": "NO SUGAR RASPBERRY 0,5L", "category": "Drinks", "price": "1.52"},\n    {"product": "HEDELMÄMIX PURUKUMI", "category": "Food", "price": "2.48"},\n    {"product": "SAKSANPÄHKINÄ", "category": "Food", "price": "3.95"},\n    {"product": "100 % KAURA 6KPL", "category": "Food", "price": "3.68"},\n    {"product": "VANILJAMAITOVALM. 125G SKYR AIR", "category": "Food", "price": "2.70"},\n    {"product": "SKYR AIR MANDRN-JUUSTOKAKKU 125G", "category": "Food", "price": "4.05"},\n    {"product": "ENJOY PEAR ICE CREAM PURUKUMI", "category": "Food", "price": "5.82"},\n    {"product": "MUOVIKASSI SM HARMAA", "category": "Other", "price": "0.50"}\n]\n```')
+- ('test_categorize_products_in_the_receipt_from_side failed', '[\n    {"product": "Jenkki Fresh Apple Crush 35g", "category": "Drinks", "price": "1.79"},\n    {"product": "Monster Ultra Gold Long", "category": "Drinks", "price": "2.30"},\n    {"product": "Tölkkipantti", "category": "Other", "price": "0.15"}\n]\n```')
+- ('test_categorize_products_in_the_ripped_receipt failed', '[\n    {"product": "Jenkki Fresh, Apple Crush 35g", "category": "Drinks", "price": "1.79"},\n    {"product": "Monster Ultra Gold Long", "category": "Drinks", "price": "2.30"},\n    {"product": "Tölkkipantti", "category": "Entertainment", "price": "0.15"}\n]\n```')
+- ('test_minus_sign_in_receipt_categorization failed', '```json\n[\n    {"product": "Monster Ultra Gold Long", "category": "Drinks", "price": "1.24"},\n    {"product": "Töikkipantti (deposit)", "category": "Drinks", "price": "0.15"},\n    {"product": "Pirkka purukumi 130g", "category": "Other", "price": "2.20"},\n    {"product": "ED Sour Apple No Sugar", "category": "Drinks", "price": "2.34"},\n    {"product": "Pullopantti KMP (deposit)", "category": "Drinks", "price": "0.20"},\n    {"product": "PALAUTUS Panttipalautus (deposit return)", "category": "Other", "price": "6.00"},\n    {"product": "YHTEENSÄ (Total)", "category": "Other", "price": "2.08"}\n]\n```')
+
+False Positives:
+- ('test_non_receipt_image failed', "The image you provided is not a receipt; it is a photograph of a puppy sitting on a wooden surface. If you're looking for information about products, please provide an image of a receipt or a list of items you'd like details about. If you have any other questions or need assistance with something else, feel free to ask!")
+- ('test_very_blurry_receipt failed', 'The text in the image is quite blurry and unclear, making it difficult to read accurately. However, I can attempt to transcribe what I can make out:\n\nThe visible parts seem to include:\n- "Total: 10.50"\n- Some product names or codes that are partially readable, such as:\n  - "pizza"\n  - "100g"\n  - "200ml"\n  - "water"\n  - "soda"\n  - "coffee"\n  - "espresso"\n  - "latte"\n  - "cappuccino"\n\nGiven these partial words, it looks like the receipt might be from a café or a small restaurant that sells beverages and possibly some food items like pizza.\n\nFor a precise list of products, I would need clearer text or a better image. If you can provide a clearer image or a photo with better resolution, I can help more accurately.')

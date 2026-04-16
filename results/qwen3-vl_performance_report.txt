@@ -1,0 +1,5 @@
+Performance Report for qwen3-vl
+Total Cold Latency Tests: 1
+Total Warm Latency Tests: 5
+Average Cold Latency: 312.26 seconds
+Average Warm Latency: 781.55 seconds
